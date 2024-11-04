@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balloon exercise!</title>
+</head>
+<body>
+  <div id="balloon" tabindex="0">🎈</div>
+
+  <script>
+    const balloon = document.querySelector("#balloon");
+
+    window.addEventListener('load', () => {
+      balloon.focus();
+    });
+  
+    balloon.setAttribute("style", "display: flex; align-content: center; justify-content: center;");
+    balloon.style.fontSize = "30px";
+    let currentFont = parseInt(window.getComputedStyle(balloon).fontSize);
+    console.log(currentFont);
+
+    function arrows(event) { 
+      if (event.key === "ArrowUp") {
+        if (currentFont <= 150) {
+          currentFont *= 1.1;
+          balloon.style.fontSize = currentFont + "px";
+        } else {
+          balloon.textContent = "💥";
+          return balloon.removeEventListener("keydown",arrows);
+        };
+      }else if (event.key === "ArrowDown") {
+        currentFont /= 1.1;
+        balloon.style.fontSize = currentFont + "px";
+      };
+
+    };
+
+    balloon.addEventListener("keydown", arrows);
+
+   /*  💥 */
+  </script>
+</body>
+</html>
